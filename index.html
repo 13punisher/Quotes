@@ -1,99 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Send Me Your Quotes</title>
-  <style>
-    /* Reset & basic styling */
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom right, #ff3b6a, #ff758c);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      color: #fff;
-      padding: 20px;
-    }
-    h1 { margin-bottom: 20px; text-align:center; }
+<!DOCTYPE html>    
+<html lang="en">    
+<head>    
+  <meta charset="UTF-8">    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+  <title>Send Me Your Quotes</title>    
+  <style>    
+    /* Reset & basic styling */    
+    * { box-sizing: border-box; margin:0; padding:0; }    
+    body {    
+      font-family: 'Arial', sans-serif;    
+      background: linear-gradient(to bottom right, #ff3b6a, #ff758c);    
+      display: flex;    
+      flex-direction: column;    
+      align-items: center;    
+      justify-content: center;    
+      min-height: 100vh;    
+      color: #fff;    
+      padding: 20px;    
+    }    
+    h1 { margin-bottom: 20px; text-align:center; }    
+
+    /* Form styling */    
+    form {    
+      background: rgba(255,255,255,0.1);    
+      padding: 20px;    
+      border-radius: 15px;    
+      display: flex;    
+      flex-direction: column;    
+      width: 100%;    
+      max-width: 400px;    
+      backdrop-filter: blur(5px);    
+    }    
+    textarea, input, button {    
+      margin-bottom: 15px;    
+      padding: 12px;    
+      border-radius: 10px;    
+      border: none;    
+      font-size: 16px;    
+    }    
+    textarea { height: 100px; resize: none; }    
+    button {    
+      background-color: #fff;    
+      color: #ff3b6a;    
+      font-weight: bold;    
+      cursor: pointer;    
+      transition: 0.3s;    
+    }    
+    button:hover { background-color: #ff3b6a; color: #fff; }    
+
+    /* Message styling */  
+    #message {  
+      margin-top: 15px;  
+      font-weight: bold;  
+      text-align: center;  
+      transition: opacity 0.5s ease;  
+    }  
+
+    /* Footer */    
+    footer {    
+      margin-top: 30px;    
+      font-size: 14px;    
+      text-align: center;    
+      opacity: 0.8;    
+    }    
+
+    @media (max-width: 480px) {    
+      h1 { font-size: 24px; }    
+      textarea, input, button { font-size: 14px; padding:10px; }    
+    }  
+  </style>    
+</head>    
+<body>      
+
+  <h1>💭 Share Your Thoughts & Quotes</h1>      
+
+  <form id="quoteForm">    
+    <textarea id="quote" placeholder="Write your quote..." required></textarea>    
+    <input type="text" id="name" placeholder="Your Name (optional)">    
+    <button type="submit">Send Quote</button>    
+  </form>    
+
+  <!-- Success or error message will show here -->
+  <p id="message"></p>
+
+  <footer>Thank you for sharing! ❤️</footer>      
+
+  <script>    
+    const form = document.getElementById("quoteForm");    
+    const messageEl = document.getElementById("message");  
+    const sheetURL = "https://script.google.com/macros/s/AKfycbyYBMjEuaKUlZS50rpvPZEbXM_m-d3JyXQJTqxhH_ma-WUN3QHHXqLJLu_aZTjYL1Ts/exec"; // Replace with your Web App URL    
     
-    /* Form styling */
-    form {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 15px;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 400px;
-      backdrop-filter: blur(5px);
-    }
-    textarea, input, button {
-      margin-bottom: 15px;
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-    }
-    textarea { height: 100px; resize: none; }
-    button {
-      background-color: #fff;
-      color: #ff3b6a;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover { background-color: #ff3b6a; color: #fff; }
+    form.addEventListener("submit", async e => {    
+      e.preventDefault();    
+      const quote = document.getElementById("quote").value;    
+      const name = document.getElementById("name").value;    
+    
+      try {    
+        const res = await fetch(sheetURL, {    
+          method: "POST",    
+          body: JSON.stringify({ name, quote })    
+        });    
+        const data = await res.json();    
 
-    /* Footer */
-    footer {
-      margin-top: 30px;
-      font-size: 14px;
-      text-align: center;
-      opacity: 0.8;
-    }
-    @media (max-width: 480px) {
-      h1 { font-size: 24px; }
-      textarea, input, button { font-size: 14px; padding:10px; }
-    }
-  </style>
-</head>
-<body>
+        if (data.status === "success") {  
+          messageEl.style.color = "#00ffcc";  
+          messageEl.innerText = "✅ Quote submitted!";  
+          form.reset();  
 
-  <h1>💭 Share Your Thoughts & Quotes</h1>
+          // Fade out message after 3 seconds
+          setTimeout(() => { messageEl.style.opacity = "0"; }, 3000);  
+          setTimeout(() => { messageEl.innerText = ""; messageEl.style.opacity = "1"; }, 3500);  
+        }  
+      } catch(err) {    
+        messageEl.style.color = "yellow";  
+        messageEl.innerText = "❌ Error: " + err.message;  
+      }    
+    });    
+  </script>    
 
-  <form id="quoteForm">
-    <textarea id="quote" placeholder="Write your quote..." required></textarea>
-    <input type="text" id="name" placeholder="Your Name (optional)">
-    <button type="submit">Send Quote</button>
-  </form>
-
-  <footer>Thank you for sharing! ❤️</footer>
-
-  <script>
-    const form = document.getElementById("quoteForm");
-    const sheetURL = "https://script.google.com/macros/s/AKfycbx_XjX6sLe2AWyxq6-iP1MV0XkOq7sPnuVdMiboyt4AkUBA6dGHQwRC4-EDJ2Kmqak/exec"; // Replace with your Web App URL
-
-    form.addEventListener("submit", async e => {
-      e.preventDefault();
-      const quote = document.getElementById("quote").value;
-      const name = document.getElementById("name").value;
-
-      try {
-        const res = await fetch(sheetURL, {
-          method: "POST",
-          body: JSON.stringify({ name, quote })
-        });
-        const data = await res.json();
-        if(data.status === "success") alert("✅ Quote submitted!");
-        form.reset();
-      } catch(err) {
-        alert("❌ Error: " + err.message);
-      }
-    });
-  </script>
-</body>
+</body>    
 </html>

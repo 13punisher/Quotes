@@ -37,7 +37,7 @@
       border-radius: 10px;    
       border: none;    
       font-size: 16px;    
-      background: #222;   /* Dark input background */  
+      background: #121212;   /* DarkGrey input background */  
       color: #fff;        /* White text inside */  
     }    
     textarea { height: 100px; resize: none; }    
@@ -59,12 +59,18 @@
     }  
 
     /* Footer */    
-    footer {    
-      margin-top: 30px;    
-      font-size: 14px;    
-      text-align: center;    
-      opacity: 0.7;    
-    }    
+    .main-footer {
+  margin-top: 30px;
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.sub-footer {
+  margin-top: 10px;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.5;    
 
     @media (max-width: 480px) {    
       h1 { font-size: 24px; }    
@@ -78,14 +84,15 @@
 
   <form id="quoteForm">    
     <textarea id="quote" placeholder="Write your quote..." required></textarea>    
-    <input type="text" id="name" placeholder="Your Name (optional)">    
+    <input type="text" id="name" placeholder="Your username (optional)">    
     <button type="submit">Send Quote</button>    
   </form>    
 
   <!-- Success or error message will show here -->
   <p id="message"></p>
 
-  <footer>Thank you for sharing! ❤️</footer>      
+  <footer class="main-footer">Thank you for sharing! ❤️</footer>
+<footer class="sub-footer">Made with ❤️ by Unfiltered | Niraj</footer>      
 
   <script>    
     const form = document.getElementById("quoteForm");    

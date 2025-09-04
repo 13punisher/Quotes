@@ -3,7 +3,7 @@
 <head>    
   <meta charset="UTF-8">    
   <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-  <title>Send Me Your Quotes</title>    
+  <title>Send UnfilteredNiraj Your Quotes</title>    
   <style>    
     /* Reset & basic styling */    
     * { box-sizing: border-box; margin:0; padding:0; }    
@@ -37,7 +37,7 @@
       border-radius: 10px;    
       border: none;    
       font-size: 16px;    
-      background: #111;   /* Dark input background */  
+      background: #666;   /* Dark input background */  
       color: #fff;        /* White text inside */  
     }    
     textarea { height: 100px; resize: none; }    
@@ -98,7 +98,7 @@
       const name = document.getElementById("name").value;    
 
       // Show loading message instantly
-      messageEl.style.color = "yellow";
+      messageEl.style.color = "white";
       messageEl.innerText = "⏳ Submitting...";
 
       try {    
@@ -110,7 +110,7 @@
 
         if (data.status === "success") {  
           messageEl.style.color = "#00ffcc";  
-          messageEl.innerText = "✅ Quote submitted!";  
+          messageEl.innerText = "✅ Quote submitted! Thankyou ❤️";  
           form.reset();  
 
           // Fade out message after 3 seconds

@@ -3,7 +3,7 @@
 <head>    
   <meta charset="UTF-8">    
   <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-  <title>Send UnfilteredNiraj Your Quotes</title>    
+  <title>Send UnfilteredNiraj Your Sarcasm</title>    
   <style>    
     /* Reset & basic styling */    
     * { box-sizing: border-box; margin:0; padding:0; }    
@@ -26,7 +26,7 @@
 }
 
 @media (max-width: 480px) {    
-  h1 { font-size: 15px; }  /* Smaller heading on mobile */  
+  h1 { font-size: 20px; }  /* Smaller heading on mobile */  
   textarea, input, button { font-size: 14px; padding:10px; }    
 }    
 
@@ -71,7 +71,7 @@
     /* Footer */    
     footer {
   margin-top: 30px;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   opacity: 0.4;
 }    
@@ -84,7 +84,7 @@
 </head>    
 <body>      
 
-  <h1>💭 Share Your Thoughts & Quotes</h1>      
+  <h1>💭 Share Your Sarcastic Thoughts & Quotes</h1>      
 
   <form id="quoteForm">    
     <textarea id="quote" placeholder="Write your quote..." required></textarea>    
@@ -108,7 +108,7 @@
       const name = document.getElementById("name").value;    
 
       // Show loading message instantly
-      messageEl.style.color = "white";
+      messageEl.style.color = "#00ffcc";
       messageEl.innerText = "⏳ Submitting...";
 
       try {    
@@ -120,7 +120,7 @@
 
         if (data.status === "success") {  
           messageEl.style.color = "#00ffcc";  
-          messageEl.innerText = "✅ Quote submitted! Thankyou ❤️";  
+          messageEl.innerText = "✅ Quote submitted successfully! Thankyou ❤️";  
           form.reset();  
 
           // Fade out message after 3 seconds

@@ -17,8 +17,18 @@
       min-height: 100vh;    
       color: #fff;   /* White text */   
       padding: 20px;    
-    }    
-    h1 { margin-bottom: 20px; text-align:center; }    
+    } 
+    h1 { 
+  margin-bottom: 20px; 
+  text-align: center; 
+  font-size: 36px;   /* Big heading on desktop */
+  font-weight: bold; /* Extra bold */
+}
+
+@media (max-width: 480px) {    
+  h1 { font-size: 22px; }  /* Smaller heading on mobile */  
+  textarea, input, button { font-size: 14px; padding:10px; }    
+}    
 
     /* Form styling */    
     form {    
@@ -63,14 +73,14 @@
   margin-top: 30px;
   font-size: 14px;
   text-align: center;
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .sub-footer {
   margin-top: 10px;
   font-size: 12px;
   text-align: center;
-  opacity: 0.5;    
+  opacity: 0.4;    
 
     @media (max-width: 480px) {    
       h1 { font-size: 24px; }    
@@ -91,7 +101,7 @@
   <!-- Success or error message will show here -->
   <p id="message"></p>
 
-  <footer class="main-footer">Thank you for sharing! ❤️</footer>
+  <footer class="main-footer">Thank you for sharing!</footer>
 <footer class="sub-footer">Made with ❤️ by Unfiltered | Niraj</footer>      
 
   <script>    
